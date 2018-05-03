@@ -1,4 +1,5 @@
 <script>
+import myTitle from './templateTitle'
 export default{
     data(){
         return{
@@ -36,29 +37,35 @@ export default{
       goToList: function () {
         this.$router.push('/')
       }
+    },
+    components: {
+      myTitle
     }
 }
+
 </script>
 <template>
   <div>
-    <el-card>
-      <el-form :rules="rules" :inline="true" label-position="top" label-width="100%">
-        <el-form-item label="Titulo" prop="title">
-          <el-input v-model="myForm.title"></el-input>
-        </el-form-item>
-        <el-form-item label="Author" prop="author">
-          <el-input v-model="myForm.author"></el-input>
-        </el-form-item>
-      </el-form>
-      <el-row>
-        <el-col :span="3">
-          <el-button type="primary" size="mini" @click="save()">Salvar</el-button>
-        </el-col>
-        <el-col :span="3">
-          <el-button type="primary" size="mini" @click="goToList()">Voltar para pesquisa</el-button>
-        </el-col>
-      </el-row>
-    </el-card>
+    <myTitle>
+      <el-card>
+        <el-form :rules="rules" :inline="true" label-position="top" label-width="100%">
+          <el-form-item label="Titulo" prop="title">
+            <el-input v-model="myForm.title"></el-input>
+          </el-form-item>
+          <el-form-item label="Author" prop="author">
+            <el-input v-model="myForm.author"></el-input>
+          </el-form-item>
+        </el-form>
+        <el-row>
+          <el-col :span="3">
+            <el-button type="primary" size="mini" @click="save()">Salvar</el-button>
+          </el-col>
+          <el-col :span="3">
+            <el-button type="primary" size="mini" @click="goToList()">Voltar para pesquisa</el-button>
+          </el-col>
+        </el-row>
+      </el-card>
+    </myTitle>
   </div>
 </template>
 <style>

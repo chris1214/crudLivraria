@@ -1,4 +1,5 @@
 <script>
+import myTitle from './templateTitle'
 export default {
   data () {
     return {
@@ -11,7 +12,7 @@ export default {
     }
   },
   methods: {
-    getLivros (search){
+    getLivros (search = ''){
       this.$http.get(`${this.http}${search}`).then(
          response=>{
            this.livros = response.body
@@ -48,6 +49,7 @@ export default {
     routerPush (url){
       this.$router.push(url);
     },
+
     goToCreate () {
       this.routerPush('/create')
     },
@@ -59,6 +61,7 @@ export default {
     goToShow (id) {
       this.routerPush('/show/' + id)
     },
+
     doDelete(id) {
       this.$http.delete(`${this.http}/${id}`).then(
          response=>{
@@ -69,70 +72,75 @@ export default {
     },
   },
   created(){
-      this.getLivros(``)
+      this.getLivros()
   },
+  components: {
+    myTitle
+  }
 }
+
+
+
 
 </script>
 <template>
   <div style="margin: 0 50px;">
     <div>
-      <h1>Livraria</h1>
-      <el-card>
-        <el-collapse>
-          <el-collapse-item title="Filtro">
-            <el-form :inline="true" label-position="top" label-width="100%">
-              <el-form-item label="Titulo">
-                <el-input v-model="filtro.title"></el-input>
-              </el-form-item>
-              <el-form-item label="Author">
-                <el-input v-model="filtro.author"></el-input>
-              </el-form-item>
-            </el-form>
-            <el-row>
-              <el-col :span="3">
-                <el-button @click="search()">Pesquisar</el-button>
-              </el-col>
-              <el-col :span="3">
-                <el-button @click="goToCreate()">Novo</el-button>
-              </el-col>
-              <el-col :span="3">
-                <el-button @click="resetForm()">Limpar</el-button>
-              </el-col>
-            </el-row>
-          </el-collapse-item>
-        </el-collapse>
-      </el-card>
-      <el-card>
-        <el-table
-          :data="livros"
-          border
-          style="width: 100%">
-          <el-table-column
-            width="125">
-            <template slot-scope="scope">
-              <el-button @click="goToEdit(scope.row.id)" type="primary" icon="el-icon-edit" size="mini"></el-button>
-              <el-button @click="doDelete(scope.row.id)" type="primary" icon="el-icon-delete"
-                         size="mini"></el-button>
-              <el-button @click="goToShow(scope.row.id)" type="primary" icon="el-icon-view" size="mini"></el-button>
-            </template>
-          </el-table-column>
-          <el-table-column
-            prop="title"
-            label="Titulo">
-          </el-table-column>
-          <el-table-column
-            prop="author"
-            label="Author">
-          </el-table-column>
-          <el-table-column
-            prop="id"
-            label="id">
-          </el-table-column>
-        </el-table>
-        {{livros.id}}
-        {{livros.title}}
-      </el-card>
+      <myTitle>
+        <el-card>
+          <el-collapse>
+            <el-collapse-item title="Filtro">
+              <el-form :inline="true" label-position="top" label-width="100%">
+                <el-form-item label="Titulo">
+                  <el-input v-model="filtro.title"></el-input>
+                </el-form-item>
+                <el-form-item label="Author">
+                  <el-input v-model="filtro.author"></el-input>
+                </el-form-item>
+              </el-form>
+              <el-row>
+                <el-col :span="3">
+                  <el-button @click="search()">Pesquisar</el-button>
+                </el-col>
+                <el-col :span="3">
+                  <el-button @click="goToCreate()">Novo</el-button>
+                </el-col>
+                <el-col :span="3">
+                  <el-button @click="resetForm()">Limpar</el-button>
+                </el-col>
+              </el-row>
+            </el-collapse-item>
+          </el-collapse>
+        </el-card>
+        <el-card>
+          <el-table
+            :data="livros"
+            border
+            style="width: 100%">
+            <el-table-column
+              width="125">
+              <template slot-scope="scope">
+                <el-button @click="goToEdit(scope.row.id)" type="primary" icon="el-icon-edit" size="mini"></el-button>
+                <el-button @click="doDelete(scope.row.id)" type="primary" icon="el-icon-delete"
+                           size="mini"></el-button>
+                <el-button @click="goToShow(scope.row.id)" type="primary" icon="el-icon-view" size="mini"></el-button>
+              </template>
+            </el-table-column>
+            <el-table-column
+              prop="title"
+              label="Titulo">
+            </el-table-column>
+            <el-table-column
+              prop="author"
+              label="Author">
+            </el-table-column>
+            <el-table-column
+              prop="id"
+              label="id">
+            </el-table-column>
+          </el-table>
+        </el-card>
+      </myTitle>
     </div>
   </div>
 </template>
@@ -148,6 +156,4 @@ label.el-form-item__label {
 .el-button--mini, .el-button--mini.is-round {
     padding: 5px 5px;
 }
-
-
 </style>

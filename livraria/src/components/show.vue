@@ -1,4 +1,5 @@
 <script>
+import myTitle from './templateTitle'
 export default{
     props: ['id'],
     data(){
@@ -38,12 +39,15 @@ export default{
     },
     created() {
       this.getLivro();
+    },
+    components: {
+      myTitle
     }
 }
 </script>
 <template>
   <div>
-    <div>
+    <myTitle>
       <el-card>
         <el-form :inline="true" label-position="top" label-width="100%">
           <el-form-item label="Titulo">
@@ -65,7 +69,7 @@ export default{
           </el-col>
         </el-row>
       </el-card>
-    </div>
+    </myTitle>
   </div>
 </template>
 <style>
