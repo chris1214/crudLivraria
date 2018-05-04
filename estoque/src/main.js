@@ -3,7 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import gets from './router/gets'
+Vue.use(gets);
 
 import VueResource from 'vue-resource'
 

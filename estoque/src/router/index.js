@@ -14,14 +14,16 @@ export default new Router({
       component: list
     },
     {
-      path: '/edit',
+      path: '/edit/:id',
       name: 'edit',
-      component: edit
+      component: edit,
+      props: true
     },
     {
-      path: '/show',
+      path: '/show/:id',
       name: 'show',
-      component: show
+      component: show,
+      props: true
     },
   ]
 })

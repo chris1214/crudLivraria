@@ -1,12 +1,21 @@
 <script>
 import templateHeader from './templateHeader'
 export default{
+  props: ['id'],
   data(){
       return{
       }
   },
   components:{
     templateHeader
+  },
+  methods: {
+    goToEdit(){
+      this.$router.push(`/edit/${this.id}`);
+    },
+    goToList(){
+      this.$router.push(`/`)
+    }
   }
 }
 
@@ -109,10 +118,10 @@ export default{
 
         <el-row>
           <el-col :span="4">
-            <el-button size="mini">Voltar para pesquisa</el-button>
+            <el-button @click="goToList()" size="mini">Voltar para pesquisa</el-button>
           </el-col>
           <el-col :span="4">
-            <el-button size="mini">Editar</el-button>
+            <el-button @click="goToEdit()" size="mini">Editar</el-button>
           </el-col>
         </el-row>
       </el-card>
